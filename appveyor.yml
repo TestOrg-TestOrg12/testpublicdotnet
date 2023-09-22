@@ -1,22 +1,5 @@
 version: 1.0.{build}
-clone_folder: C:\Users\projects\test\
-before_build:
-- cmd: >-
-    echo %PATH%
-
-    dotnet restore
-
-    msbuild -p:RestorePackagesConfig=true -t:restore
-
-    msbuild -t:build
-build:
-  verbosity: minimal
-notifications:
-
-  - provider: Webhook
-    url: https://appveyor.requestcatcher.com/
-    method: POST
-
-    on_build_success: true
-    on_build_failure: true
-    on_build_status_changed: true
+image: Visual Studio 2022
+build_script:
+- cmd: PowerShell -Version 4.0 .\build.ps1
+test: off 
